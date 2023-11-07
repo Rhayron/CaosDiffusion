@@ -1,5 +1,4 @@
 // Seleciona os elementos HTML de entrada e saída:
-const contDias = document.querySelector('#cont-dias');
 const contHoras = document.querySelector('#cont-horas');
 const contMinutos = document.querySelector('#cont-minutos');
 const contSegundos = document.querySelector('#cont-segundos');
@@ -33,7 +32,6 @@ setInterval(() => {  // Timer para atualização da view
   const minutos = Math.floor(horasResto / 60);
   const segundos = horasResto % 60;
 
-  contDias.innerHTML = dias;
   contHoras.innerHTML = horas;
   contMinutos.innerHTML = minutos;
   contSegundos.innerHTML = segundos;
