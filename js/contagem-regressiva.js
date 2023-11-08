@@ -3,10 +3,29 @@ const contHoras = document.querySelector('#cont-horas');
 const contMinutos = document.querySelector('#cont-minutos');
 const contSegundos = document.querySelector('#cont-segundos');
 const contagem = document.querySelector('#contagem');
-const nomeEvento = document.querySelector('#nome-evento');
+const proxExecucao = document.querySelector('#proxima-execucao');
 
 let horario = new Date(Date.now());
-horario.setHours(12,0,0,0);
+const horDef = document.querySelector('#horario-script').value;
+const [horaDef, minutosDef] = horDef.split(':');
+horario.setTime(Date.now());
+horario.setHours(horaDef,minutosDef,0,0);
+
+// Quando o botão "Atualizar" for pressionado:
+const formulario = document.querySelector('form');
+formulario.addEventListener('submit', function(e) {
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  // Lê o horário digitado pelo usuário:
+  const horarioDef = document.querySelector('#horario-script').value;
+  const [horaDef, minutosDef] = horarioDef.split(':');
+  horario.setTime(Date.now());
+  horario.setHours(horaDef,minutosDef,0,0);
+
+  return false;
+});
 
 setInterval(() => {  // Timer para atualização da view
   const msFaltantes = horario.getTime() - Date.now();
@@ -35,6 +54,13 @@ setInterval(() => {  // Timer para atualização da view
   contHoras.innerHTML = horas;
   contMinutos.innerHTML = minutos;
   contSegundos.innerHTML = segundos;
+
+  const dia = horario.getDate().toString().padStart(2, '0');
+  const mes = (horario.getMonth()+1).toString().padStart(2, '0');
+  const ano = horario.getFullYear();
+  const hora = horario.getHours().toString().padStart(2, '0');
+  const minuto = horario.getMinutes().toString().padStart(2, '0');
+  proxExecucao.innerHTML = `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
 }, 100);
 
 
