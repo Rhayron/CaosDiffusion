@@ -1,9 +1,22 @@
 // Seleciona os elementos HTML de entrada e saída:
-const contHoras = document.querySelector('#cont-horas');
-const contMinutos = document.querySelector('#cont-minutos');
-const contSegundos = document.querySelector('#cont-segundos');
-const contagem = document.querySelector('#contagem');
-const proxExecucao = document.querySelector('#proxima-execucao');
+var contHoras = document.querySelector('#cont-horas');
+var contMinutos = document.querySelector('#cont-minutos');
+var contSegundos = document.querySelector('#cont-segundos');
+var contagem = document.querySelector('#contagem');
+var proxExecucao = document.querySelector('#proxima-execucao');
+
+var alertPlaceholder = document.getElementById('alerta')
+var alert = (message, type) => {
+  var wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
 
 let horario = new Date(Date.now());
 fetch('http://localhost:3000/horario', {
@@ -51,9 +64,13 @@ fetch('http://localhost:3000/horario', {
     const sTruncado = Math.ceil(sFaltantes);  // Arredonda as casas decimais para cima, pois o contador não mostra os milisegundos
     if (sTruncado > 0) {
       s = sTruncado;
+      exec = true;
     } else if (sTruncado == 0) {
       s = 0;
-      iniciaScript();
+      if(exec){ // Controle para executar o script uma única vez enquanto sTruncado == 0
+        iniciaScript();
+        exec = false;
+      }
     } else {  // Quando atingir 0, executa o script e reinicia a contagem, acrescentando 1 dia à variável "horario"
       s = 0;
       horario.setTime(horario.getTime() + 24*60*60*1000);
