@@ -11,7 +11,20 @@ window.iniciaScript = function iniciaScript() {
 
   // Implementação do script
 
-
+  // Twitter
+  fetch("http://localhost:3000/twitter", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify({
+      tweet: 'Teste',
+    })
+  })
+  .then( (response) => {
+  });
 
   // Alerta de término da execução do script
   alert(`Script finalizado com sucesso (${stringHorario})`, 'success');
