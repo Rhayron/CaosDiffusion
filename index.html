@@ -36,95 +36,111 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">CaosDiffusion</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="https://twitter.com/CaosDiffusion">Twitter</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-    <main class="flex-grow-1 p-2 text-center">
+    <div class="d-flex flex-column flex-lg-row" style="min-height: 90.6vh;">
+      <main class="flex-grow-1 p-2 text-center">
 
-      <div class="p-4 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold">
-            CaosDiffusion
-          </h1>
-          <p class="col-md-8 mx-auto fs-4">
-            O script do CaosDiffusion é executado diariamente, em um horário definido pelo usuário. O script gera uma imagem por inteligência artificial e posta a imagem gerada no Twitter. A contagem regressiva mostra o tempo faltante até a execução do script.
-          </p>
-        </div>
-      </div>
-
-      <div class="container text-center" style="max-width: 20rem;">
-        <div class="row bg-dark text-white fs-5 fw-bold" id="contagem">
-          <div class="col-4 border py-3 px-0">
-            <output id="cont-horas">
-              0
-            </output>
-          </div>
-          <div class="col-4 border py-3 px-0">
-            <output id="cont-minutos">
-              0
-            </output>
-          </div>
-          <div class="col-4 border py-3 px-0" >
-            <output id="cont-segundos">
-              0
-            </output>
+        <div class="p-4 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-4">
+            <h1 class="display-5 fw-bold">
+              CaosDiffusion
+            </h1>
+            <p class="col-md-8 mx-auto fs-4">
+              O script do CaosDiffusion é executado diariamente, em um horário definido pelo usuário. O script gera uma imagem por inteligência artificial e posta a imagem gerada no Twitter. A contagem regressiva mostra o tempo faltante até a execução do script.
+            </p>
           </div>
         </div>
-        <div class="row bg-light overflow-hidden">
-          <div class="col-4 border py-3 px-0">
-            horas
-          </div>
-          <div class="col-4 border py-3 px-0">
-            minutos
-          </div>
-          <div class="col-4 border py-3 px-0">
-            segundos
-          </div>
-        </div>
-      </div>
 
-      <br />
-
-      <div class="container bg-secondary text-white text-center rounded mt-2" style="max-width: 20rem;">
-        <output class="fs-6">Próxima execução:</output>
-        <br />
-        <output class="fs-5 fw-bold" id="proxima-execucao"></output>
-      </div>
-
-      <br />
-
-      <form class="container text-center" style="max-width: 20rem;">
-        <div class="row align-items-center justify-content-center d-flex flex-column">
-          <div class="col">
-            <label for="horario-script" class="form-label">Horário de execução</label>
-          </div>
-          <div class="col d-flex flex-row align-items-center justify-content-center">
-            <input type="time" id="horario-script" class="form-control mx-1 text-center" autocomplete="false" aria-describedby="horarioHelpBlock" value="12:00" style="max-width: 5rem;">
-            <input type="submit" class="btn btn-dark mx-1" value="Atualizar">
-          </div>
-          <div class="col">
-            <div id="horarioHelpBlock" class="form-text">
-              Defina o horário programado para a execução do script (formato 24h).
+        <div class="container text-center" style="max-width: 20rem;">
+          <div class="row bg-dark text-white fs-5 fw-bold" id="contagem">
+            <div class="col-4 border py-3 px-0">
+              <output id="cont-horas">
+                0
+              </output>
+            </div>
+            <div class="col-4 border py-3 px-0">
+              <output id="cont-minutos">
+                0
+              </output>
+            </div>
+            <div class="col-4 border py-3 px-0" >
+              <output id="cont-segundos">
+                0
+              </output>
             </div>
           </div>
-          <div class="col">
-            <a href="https://twitter.com/CaosDiffusion" class="btn btn-info mt-3 text-white" role="button"><i class="bi bi-twitter"></i> Ir para o Twitter</button>
+          <div class="row bg-light overflow-hidden">
+            <div class="col-4 border py-3 px-0">
+              horas
+            </div>
+            <div class="col-4 border py-3 px-0">
+              minutos
+            </div>
+            <div class="col-4 border py-3 px-0">
+              segundos
+            </div>
           </div>
         </div>
-      </form>
 
-      <div class="container text-center mt-3" style="max-width: 30rem;">
-        <div id="alerta" style="max-width: 30rem;"></div>
-      </div>
+        <br />
 
-    </main>
-    <footer class="bg-light text-dark text-opacity-50 fst-italic text-center p-2">
+        <div class="container bg-secondary text-white text-center rounded mt-2" style="max-width: 20rem;">
+          <output class="fs-6">Próxima execução:</output>
+          <br />
+          <output class="fs-5 fw-bold" id="proxima-execucao"></output>
+        </div>
+
+        <br />
+
+        <form class="container text-center" style="max-width: 20rem;">
+          <div class="row align-items-center justify-content-center d-flex flex-column">
+            <div class="col">
+              <label for="horario-script" class="form-label">Horário de execução</label>
+            </div>
+            <div class="col d-flex flex-row align-items-center justify-content-center">
+              <input type="time" id="horario-script" class="form-control mx-1 text-center" autocomplete="false" aria-describedby="horarioHelpBlock" value="12:00" style="max-width: 5rem;">
+              <input type="submit" class="btn btn-dark mx-1" value="Atualizar">
+            </div>
+            <div class="col">
+              <div id="horarioHelpBlock" class="form-text">
+                Defina o horário programado para a execução do script (formato 24h).
+              </div>
+            </div>
+            <div class="col">
+              <a href="https://twitter.com/CaosDiffusion" class="btn btn-info mt-3 text-white" role="button"><i class="bi bi-twitter"></i> Ir para o Twitter</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="container text-center mt-3" style="max-width: 30rem;">
+          <div id="alerta" style="max-width: 30rem;"></div>
+        </div>
+
+      </main>
+      <aside class="col-lg-4 text-center" style="background-color: black;">
+        <div class="fs-5 fw-bold mx-4 mt-4 mb-2 rounded-3 bg-secondary" style="color: black;">
+          Feed
+        </div>
+        <div class="text-secondary mx-4 mb-2 fst-italic" style="font-size: .875rem;">
+          Obs.: É necessário estar logado em uma conta no Twitter para que o feed apareça, e pode não funcionar em todos os navegadores.
+        </div>
+        <div class="px-4 mb-4">
+          <a class="twitter-timeline mx-2" data-lang="pt" data-theme="dark" href="https://twitter.com/CaosDiffusion?ref_src=twsrc%5Etfw">Tweets by CaosDiffusion</a>
+        </div>
+      </aside>
+    </div>
+    <footer class="bg-dark text-secondary text-opacity-70 fst-italic text-center p-2">
       Copyright &copy; 2023 Gustavo Buratto, Rhayron S. Nogueira
     </footer>
   </div>
 
-
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="js/plugins.js"></script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
