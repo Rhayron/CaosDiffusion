@@ -20,7 +20,7 @@ window.iniciaScript = function iniciaScript() {
       'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify({
-      tweet: 'Teste',
+      imagem: '../img/placeholder.jpg',
     })
   })
   .then( (response) => {

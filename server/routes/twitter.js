@@ -21,10 +21,12 @@ router.post('/', function(req, res) {
 
   const rwClient = client.readWrite;
 
-  async function postTweet() {
+  async function postTweet(imagem) {
     try {
+      const mediaId = await rwClient.v1.uploadMedia(imagem);
       const tweet = await rwClient.v2.tweet({
-        text: 'Teste'
+        text: '',
+        media: {media_ids: [mediaId]}
       });
       console.log(`Tweet postado com o ID ${tweet.data.id}`);
     } catch (error) {
@@ -32,7 +34,7 @@ router.post('/', function(req, res) {
     }
   }
 
-  postTweet();
+  postTweet(req.body.imagem);
 });
 
 module.exports = router;
