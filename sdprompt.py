@@ -85,5 +85,12 @@ def generate_image(api_key, text_prompt, negative_prompts, height=512, width=512
     data = response.json()
     image_data = data["artifacts"][0]["base64"]
     
+    # Save the image data as a PNG file
+    timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    image_filename = os.path.join("SDimages", f"generated_image_{timestamp}.png") # Where we save your image "SDimages" folder
+
+    with open(image_filename, "wb") as f:
+        f.write(base64.b64decode(image_data))
+    
     # Return the file image
-    return image_data  
+    return image_filename   
