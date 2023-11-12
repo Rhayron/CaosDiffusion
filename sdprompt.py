@@ -1,8 +1,10 @@
 # Import the necessary libraries
 import openai   # for the OpenAI API
 import os       # to interact with the operating system
+import requests # to send HTTP requests
 import datetime # to work with dates and times
-import base64   # to encode and decode binary data
+import base64   # to encode and decode binary 
+import json     # to work with JSON data
 
 # This function opens a file and reads its contents
 def open_file(filepath):
@@ -11,6 +13,7 @@ def open_file(filepath):
     
 # Read API keys from text files
 api_key = open_file('openaiapikey.txt')  # OpenAI API key
+sd_api_key = open_file('sdapikey.txt')    # Stability.AI API key
 
 # This function calls the OpenAI API's ChatCompletion endpoint to carry out a conversation
 def chatgpt(api_key, conversation, chatbot, user_input, temperature=0.8, frequency_penalty=0.2, presence_penalty=0):
@@ -40,3 +43,36 @@ def chatgpt(api_key, conversation, chatbot, user_input, temperature=0.8, frequen
 
     # Return ChatGPTs response
     return chat_response
+
+# This function calls the Stability.AI API to generate an image from text prompts
+def generate_image(api_key, text_prompt, negative_prompts, height=512, width=512, cfg_scale=9, clip_guidance_preset="FAST_BLUE", steps=1, samples=1):
+    api_host = 'https://api.stability.ai'
+    engine_id = "stable-diffusion-xl-beta-v2-2-2"
+
+    # Here, we're making a POST request to the SD API with our parameters
+    response = requests.post(
+        f"{api_host}/v1/generation/{engine_id}/text-to-image",
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        },
+        json={
+            "text_prompts": [
+                {
+                    "text": text_prompt # Our Text Prompt
+                }
+            ],
+            "negative_prompts": [
+                {
+                    "text": negative_prompts # Our Negative Prompt
+                }
+            ],
+            "cfg_scale": cfg_scale,
+            "clip_guidance_preset": clip_guidance_preset,
+            "height": height,
+            "width": width,
+            "samples": samples,
+            "steps": steps,
+        },
+    )
