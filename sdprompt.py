@@ -13,10 +13,16 @@ def open_file(filepath):
 api_key = open_file('openaiapikey.txt')  # OpenAI API key
 
 # This function calls the OpenAI API's ChatCompletion endpoint to carry out a conversation
-def chatgpt(api_key, temperature=0.8, frequency_penalty=0.2, presence_penalty=0):
+def chatgpt(api_key, conversation, chatbot, user_input, temperature=0.8, frequency_penalty=0.2, presence_penalty=0):
     openai.api_key = api_key
-    
-    messages_input = "hello"
+
+    # Add user input to the conversation history
+    conversation.append({"role": "user","content": user_input})
+
+    # Add a system message to the conversation
+    messages_input = conversation.copy()
+    prompt = [{"role": "system", "content": chatbot}]
+    messages_input.insert(0, prompt[0])
 
     # Make a call to the OpenAI API
     completion = openai.ChatCompletion.create(
@@ -26,8 +32,11 @@ def chatgpt(api_key, temperature=0.8, frequency_penalty=0.2, presence_penalty=0)
         presence_penalty=presence_penalty,
         messages=messages_input)
 
-    # Return ChatGPTs response
-    return print(completion)
+    # Extract ChatGPTs response
+    chat_response = completion['choices'][0]['message']['content']
 
-# Start with an empty conversation
-conversation = []
+    # Add ChatGPTs response to the conversation
+    conversation.append({"role": "assistant", "content": chat_response})
+
+    # Return ChatGPTs response
+    return chat_response
