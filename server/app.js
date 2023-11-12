@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var horarioRouter = require('./routes/horario');
+var twitterRouter = require('./routes/twitter');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/horario', horarioRouter);
+app.use('/twitter', twitterRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
