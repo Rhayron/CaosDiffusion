@@ -93,4 +93,27 @@ def generate_image(api_key, text_prompt, negative_prompts, height=512, width=512
         f.write(base64.b64decode(image_data))
     
     # Return the file image
-    return image_filename   
+    return image_filename
+
+# Start with an empty conversation
+conversation = []
+
+# Start the main loop
+n = 3  # how many images gonna create
+for i in range(n):
+    # Reset conversation for each loop
+    conversation = []
+
+    # Define an system message for ChatGPT
+    chatbot = "You are Photograph and Art Expert. You task to creating amazing prompts"
+
+    # Read prompts from a text file and use the OpenAI assistant to refine them
+    text_prompt1 = open_file("prompts.txt")
+    text_prompt = chatgpt(api_key, conversation, chatbot, text_prompt1)
+    print(text_prompt)
+    negative_prompts1 = open_file("nprompts.txt")
+    negative_prompts = chatgpt(api_key, conversation, chatbot, negative_prompts1)
+    print(negative_prompts)
+
+    # Call the Stability.AI API to generate an image using the refined prompts
+    image_filename = generate_image(sd_api_key, text_prompt, negative_prompts)   
