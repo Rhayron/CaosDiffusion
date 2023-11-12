@@ -6,3 +6,5 @@ dist
 .cache
 .parcel-cache
 keys.js
+openaiapikey.txt
+sdapikey.txt
