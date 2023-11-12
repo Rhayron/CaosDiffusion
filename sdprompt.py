@@ -76,3 +76,14 @@ def generate_image(api_key, text_prompt, negative_prompts, height=512, width=512
             "steps": steps,
         },
     )
+    
+    # Check for errors in the API response
+    if response.status_code != 200:
+        raise Exception("Non-200 response: " + str(response.text))
+    
+    # Extract the base64 image data from the response
+    data = response.json()
+    image_data = data["artifacts"][0]["base64"]
+    
+    # Return the file image
+    return image_data  
